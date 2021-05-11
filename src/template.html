@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Indego Flows</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            z-index: 0;
+        }
+
+        #headerblock {
+            position: absolute;
+            top: 2%;
+            left: 2%;
+            padding: 15px;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid black;
+            /* border-radius: 4px; */
+            /* color: white; */
+            box-shadow: 8px 8px 2px 1px rgba(0, 0, 0, 0.3);
+        }
+
+        #graph {
+            position: absolute;
+            width: 20vw;
+            height: 90vh;
+            bottom: 5%;
+            right: 2%;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 2px 2px 8px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        #station-address {
+            text-transform: capitalize;
+            font-style: italic;
+            text-align: center;
+        }
+
+        hr {
+            color: white;
+        }
+    </style>
+
+    <!-- <script defer type="module" src="./index.js"></script> -->
+</head>
+
+<body>
+    <div id="map">
+        <div id="headerblock">
+            <h1>Indego Flows</h1>
+
+            <hr />
+
+            <p>
+                Showing
+
+                <select name="directionality" id="directionality">
+                    <option value="destinations">inbound</option>
+                    <option value="origins">outbound</option>
+                    <option value="totalTrips">all</option>
+                </select>
+                trips
+            </p>
+
+            <h3 id="station-name">Municipal Services Building Plaza</h3>
+            <p id="station-address">1401 John F. Kennedy Blvd.</p>
+        </div>
+        <div id="graph">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+</body>
+
+</html>
