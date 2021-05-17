@@ -8,65 +8,65 @@ const TerserPlugin = require("terser-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-    mode: "production",
+  mode: "production",
 
-    entry: {
-        main: path.resolve(__dirname, "./src/index.js"),
+  entry: {
+    main: path.resolve(__dirname, "./src/js/index.js"),
+  },
+
+  output: {
+    path: path.resolve(__dirname, "./docs"),
+    filename: "[name].bundle.js",
+  },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "testing 213123123123",
+      template: path.resolve(__dirname, "./src/template.html"),
+      filename: "index.html",
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: false,
+        removeStyleLinkTypeAttributes: false,
+        useShortDoctype: true,
+      },
+    }),
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin(),
+  ],
+
+  resolve: {
+    alias: {
+      vue$: "vue/dist/vue.esm.js",
     },
+    extensions: ["*", ".js", ".vue", ".json"],
+  },
 
-    output: {
-        path: path.resolve(__dirname, "./docs"),
-        filename: "[name].bundle.js",
-    },
-
-    plugins: [
-        new HtmlWebpackPlugin({
-            title: "testing 213123123123",
-            template: path.resolve(__dirname, "./src/template.html"),
-            filename: "index.html",
-            minify: {
-                collapseWhitespace: true,
-                removeComments: true,
-                removeRedundantAttributes: true,
-                removeScriptTypeAttributes: false,
-                removeStyleLinkTypeAttributes: false,
-                useShortDoctype: true,
-            },
-        }),
-        new CleanWebpackPlugin(),
-        new MiniCssExtractPlugin(),
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+      },
+      // CSS, PostCSS, and Sass
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+      {
+        test: /\.vue$/,
+        loader: "vue-loader",
+      },
+      {
+        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        type: "asset/resource",
+      },
     ],
-
-    resolve: {
-        alias: {
-            vue$: "vue/dist/vue.esm.js",
-        },
-        extensions: ["*", ".js", ".vue", ".json"],
-    },
-
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-            },
-            // CSS, PostCSS, and Sass
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, "css-loader"],
-            },
-            {
-                test: /\.vue$/,
-                loader: "vue-loader",
-            },
-            {
-                test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-                type: "asset/resource",
-            },
-        ],
-    },
-    optimization: {
-        minimize: true,
-        minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
-    },
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
+  },
 };
