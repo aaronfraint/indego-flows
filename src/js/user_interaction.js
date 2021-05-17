@@ -1,5 +1,25 @@
 import { colors } from "./colors";
 import { urlRoot } from "./api";
+import { update_graph_with_api_data } from "./graphs";
+
+const make_popup = () =>
+  new mapboxgl.Popup({
+    closebutton: false,
+    className: "i-am-a-popup",
+  });
+
+const bind_popup = (map, html_msg, target) => {
+  var popup = make_popup();
+  popup.setLngLat(target.lngLat).setHTML(html_msg).addTo(map);
+};
+
+const remove_all_popups = () => {
+  // Remove a single popup, if there is one on the map
+  var existingPopup = document.getElementsByClassName("i-am-a-popup");
+  if (existingPopup.length) {
+    existingPopup[0].remove();
+  }
+};
 
 const wire_up_dropdown_selector = (map) => {
   const selectElement = document.querySelector("#directionality");
@@ -43,6 +63,23 @@ const add_map_hover_styles = (map) => {
   map.on("mouseleave", "indego-all", () => {
     map.getCanvas().style.cursor = "";
     map.setPaintProperty("indego-all", "circle-radius", 2);
+  });
+
+  map.on("mouseenter", "indego-query", function (e) {
+    var stationTextDiv = document.querySelector("#station-name");
+    var selected_station_name = stationTextDiv.innerHTML;
+
+    var props = e.features[0].properties;
+
+    var msg = "<h3>Trips to/from " + selected_station_name + "</h3><ul>";
+    msg += "<li>Total: " + props.totalTrips * 75 + "</li>";
+    msg += "<li>FROM selected station: " + props.destinations * 75 + "</li>";
+    msg += "<li>TO selected station: " + props.origins * 75 + "</li>";
+    msg += "</ul>";
+    bind_popup(map, msg, e);
+  });
+  map.on("mouseleave", "indego-query", function (e) {
+    remove_all_popups();
   });
 };
 
