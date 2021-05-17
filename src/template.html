@@ -23,18 +23,29 @@
             z-index: 0;
         }
 
+        .box-overlay {
+            padding-left: 15px;
+            padding-right: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid black;
+            box-shadow: 8px 8px 2px 1px rgba(0, 0, 0, 0.3);
+            margin-top: 2vh;
+        }
+
         #headerblock {
             position: absolute;
             top: 2%;
             left: 2%;
-            padding: 15px;
+            width: 15vw;
             z-index: 1;
-            background-color: rgba(255, 255, 255, 0.9);
-            border: 1px solid black;
-            /* border-radius: 4px; */
-            /* color: white; */
-            box-shadow: 8px 8px 2px 1px rgba(0, 0, 0, 0.3);
         }
+
+        /* #infoblock {
+            position: absolute;
+            top: 10%;
+            left: 2%;
+            z-index: 2;
+        } */
 
         #graph {
             position: absolute;
@@ -63,24 +74,31 @@
 
 <body>
     <div id="map">
+
         <div id="headerblock">
-            <h1>Indego Flows</h1>
+            <div class="box-overlay">
+                <h1>Indego Flows</h1>
+                <hr />
+                <p>
+                    Showing
 
-            <hr />
+                    <select name="directionality" id="directionality">
+                        <option value="destinations">inbound</option>
+                        <option value="origins">outbound</option>
+                        <option value="totalTrips">all</option>
+                    </select>
+                    trips
+                    <br>
+                    from <a href="https://www.rideindego.com/about/data/" target="_blank">Indego's trip data</a>
+                </p>
 
-            <p>
-                Showing
+            </div>
+            <div id="infobox" class="box-overlay">
+                <h3 id="station-name">Municipal Services Building Plaza</h3>
+                <p id="station-address">1401 John F. Kennedy Blvd.</p>
 
-                <select name="directionality" id="directionality">
-                    <option value="destinations">inbound</option>
-                    <option value="origins">outbound</option>
-                    <option value="totalTrips">all</option>
-                </select>
-                trips
-            </p>
+            </div>
 
-            <h3 id="station-name">Municipal Services Building Plaza</h3>
-            <p id="station-address">1401 John F. Kennedy Blvd.</p>
         </div>
         <div id="graph">
             <canvas id="myChart"></canvas>
