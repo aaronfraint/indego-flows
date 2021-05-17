@@ -7,6 +7,13 @@ const colors = {
     black: "0, 0, 0",
 };
 
+
+// const colors = {
+//     blue: "175,141,195",
+//     red: "127,191,123",
+//     black: "0, 0, 0",
+// };
+
 const chart_ctx = document.getElementById("myChart");
 const data = {
     labels: [],
@@ -184,6 +191,8 @@ map.on("load", function () {
     // Add a data source containing GeoJSON data.
 
     update_graph_with_api_data(urlRoot + "indego/timeseries/?q=3004");
+    myChart.options.plugins.title.text = 'Municipal Services Building Plaza';
+
 
     // TODO: show bike lanes with vector source
     map.addSource("LTS", {
@@ -293,6 +302,8 @@ map.on("load", function () {
 
         stationTextDiv.innerHTML = props.name;
         stationAddressTextDiv.innerHTML = props.addressstreet;
+
+        myChart.options.plugins.title.text = props.name;
 
         // filter selected layer to this id
         var id_filter = ["in", "station_id", props.station_id];
