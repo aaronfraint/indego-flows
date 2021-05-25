@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset="utf-8"><title>Indego Flows</title><meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"><link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet"><script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script><script src="https://cdn.jsdelivr.net/npm/chart.js"></script><style>body {
+<!doctype html><html><head><meta charset="utf-8"><title>Indego Flows</title><meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"><link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet"><script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script><style>body {
         margin: 0;
         padding: 0;
       }
@@ -9,6 +9,7 @@
         bottom: 0;
         width: 100%;
         z-index: 0;
+        font-size: 12px;
       }
 
       .box-overlay {
@@ -24,9 +25,9 @@
         position: absolute;
         top: 2%;
         left: 2%;
-        width: 15vw;
+        width: 18vw;
         min-width: 120px;
-        max-width: 200px;
+        max-width: 250px;
         z-index: 1;
       }
 
@@ -48,10 +49,20 @@
         box-shadow: 2px 2px 8px 8px rgba(0, 0, 0, 0.3);
       }
 
+      #station-name {
+        font-weight: bold;
+        text-align: center;
+        font-size: 110%;
+      }
+
       #station-address {
         text-transform: capitalize;
         font-style: italic;
         text-align: center;
+        font-size: 80%;
+      }
+      #data-text {
+        font-size: 75%;
       }
 
       hr {
@@ -61,6 +72,9 @@
         display: none;
         font-style: italic;
       }
+      #legend-img {
+        max-width: 100%;
+      }
 
       @media only screen and (max-width: 600px) {
         #graph {
@@ -69,4 +83,4 @@
         #screen-text {
           display: inline;
         }
-      }</style><script defer="defer" src="main.bundle.js"></script></head><body><div id="map"><div id="headerblock"><div class="box-overlay"><h1>Indego Flows</h1><hr><p>Showing <select name="directionality" id="directionality"><option value="destinations">inbound</option><option value="origins">outbound</option><option value="totalTrips">all</option></select> trips from <a href="https://www.rideindego.com/about/data/" target="_blank">Indego's data</a></p><div id="screen-text"><p>Please view this map on a larger screen for the full experience.</p></div></div><div id="infobox" class="box-overlay"><h3 id="station-name">Municipal Services Building Plaza</h3><p id="station-address">1401 John F. Kennedy Blvd.</p></div></div><div id="graph"><canvas id="myChart"></canvas></div></div></body></html>
+      }</style><script defer="defer" src="main.bundle.js"></script></head><body><div id="map"><div id="headerblock"><div class="box-overlay"><h1>Indego Flows</h1><hr><p>Showing <select name="directionality" id="directionality"><option value="destinations">inbound</option><option value="origins">outbound</option><option value="totalTrips">all</option></select> trips for:<br></p><p id="station-name">Municipal Services Building Plaza</p><hr><p id="data-text"><a href="https://www.rideindego.com/about/data/" target="_blank">Raw data provided by Indego / City of Philadelphia</a></p><div id="screen-text"><p>Please view this map on a larger screen for the full experience.</p></div></div><div id="infobox" class="box-overlay"><img id="legend-img" src="/img/destinations.png" alt="Legend"></div></div><div id="graph"><canvas id="myChart"></canvas></div></div></body></html>
