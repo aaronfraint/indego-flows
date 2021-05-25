@@ -26,6 +26,7 @@
         bottom: 0;
         width: 100%;
         z-index: 0;
+        font-size: 12px;
       }
 
       .box-overlay {
@@ -41,9 +42,9 @@
         position: absolute;
         top: 2%;
         left: 2%;
-        width: 15vw;
+        width: 18vw;
         min-width: 120px;
-        max-width: 200px;
+        max-width: 250px;
         z-index: 1;
       }
 
@@ -65,10 +66,17 @@
         box-shadow: 2px 2px 8px 8px rgba(0, 0, 0, 0.3);
       }
 
+      #station-name {
+        font-weight: bold;
+        text-align: center;
+        font-size: 110%;
+      }
+
       #station-address {
         text-transform: capitalize;
         font-style: italic;
         text-align: center;
+        font-size: 80%;
       }
 
       hr {
@@ -77,6 +85,9 @@
       #screen-text {
         display: none;
         font-style: italic;
+      }
+      #legend-img {
+        max-width: 100%;
       }
 
       @media only screen and (max-width: 600px) {
@@ -106,9 +117,13 @@
               <option value="origins">outbound</option>
               <option value="totalTrips">all</option>
             </select>
-            trips from
+            trips for: <br />
+          </p>
+          <p id="station-name">Municipal Services Building Plaza</p>
+          <hr />
+          <p>
             <a href="https://www.rideindego.com/about/data/" target="_blank"
-              >Indego's data</a
+              >Raw data provided by Indego / City of Philadelphia</a
             >
           </p>
           <div id="screen-text">
@@ -118,8 +133,7 @@
           </div>
         </div>
         <div id="infobox" class="box-overlay">
-          <h3 id="station-name">Municipal Services Building Plaza</h3>
-          <p id="station-address">1401 John F. Kennedy Blvd.</p>
+          <img id="legend-img" src="/img/destinations.png" alt="Legend" />
         </div>
       </div>
       <div id="graph">

@@ -36,6 +36,9 @@ const wire_up_dropdown_selector = (map) => {
       var color = "rgb(" + colors.black + ")";
     }
 
+    var legend_path = "../img/" + v + ".png";
+    document.getElementById("legend-img").setAttribute("src", legend_path);
+
     map.setPaintProperty("spider", "line-color", color);
     map.setPaintProperty("indego-query", "circle-color", color);
     map.setPaintProperty("indego-query", "circle-stroke-color", color);
@@ -89,10 +92,10 @@ const add_map_click_actions = (map, graph) => {
 
     // Update the title in the header block and address
     const stationTextDiv = document.querySelector("#station-name");
-    const stationAddressTextDiv = document.querySelector("#station-address");
+    // const stationAddressTextDiv = document.querySelector("#station-address");
 
     stationTextDiv.innerHTML = props.name;
-    stationAddressTextDiv.innerHTML = props.addressstreet;
+    // stationAddressTextDiv.innerHTML = props.addressstreet;
 
     graph.options.plugins.title.text = props.name;
 
