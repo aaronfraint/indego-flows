@@ -1,3 +1,14 @@
+import {
+  Chart,
+  BarElement,
+  BarController,
+  Title,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
+
+Chart.register(BarElement, BarController, Title, CategoryScale, LinearScale);
+
 import { colors } from "./colors";
 
 const makeGraph = () => {
