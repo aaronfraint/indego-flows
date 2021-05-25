@@ -28,6 +28,15 @@ module.exports = {
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "./src/img",
+          to: "img",
+          toType: "dir",
+        },
+      ],
+    }),
   ],
 
   module: {
@@ -48,6 +57,14 @@ module.exports = {
       {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
         type: "asset/resource",
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "img/[name].[ext]",
+            },
+          },
+        ],
       },
     ],
   },

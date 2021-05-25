@@ -7,6 +7,20 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
+let indexConfig = new HtmlWebpackPlugin({
+  title: "testing 213123123123",
+  template: path.resolve(__dirname, "./src/template.html"),
+  filename: "index.html",
+  minify: {
+    collapseWhitespace: true,
+    removeComments: true,
+    removeRedundantAttributes: true,
+    removeScriptTypeAttributes: false,
+    removeStyleLinkTypeAttributes: false,
+    useShortDoctype: true,
+  },
+});
+
 module.exports = {
   mode: "production",
 
@@ -20,21 +34,18 @@ module.exports = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
-      title: "testing 213123123123",
-      template: path.resolve(__dirname, "./src/template.html"),
-      filename: "index.html",
-      minify: {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeRedundantAttributes: true,
-        removeScriptTypeAttributes: false,
-        removeStyleLinkTypeAttributes: false,
-        useShortDoctype: true,
-      },
-    }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "./src/img",
+          to: "img",
+          toType: "dir",
+        },
+      ],
+    }),
+    indexConfig,
   ],
 
   resolve: {
@@ -62,6 +73,14 @@ module.exports = {
       {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
         type: "asset/resource",
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "img/[name].[ext]",
+            },
+          },
+        ],
       },
     ],
   },
