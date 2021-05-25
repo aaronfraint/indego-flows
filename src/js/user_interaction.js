@@ -8,6 +8,17 @@ const make_popup = () =>
     className: "i-am-a-popup",
   });
 
+const float_to_txt = (num) => {
+  var num_roundup = Math.ceil(num * 75);
+  if (num_roundup == 1) {
+    return "1 trip"
+  } else if (num_roundup > 1) {
+    return num_roundup.toString() + " trips"
+  } else if (num_roundup == 0) {
+    return "0 trips"
+  }
+}
+
 const bind_popup = (map, html_msg, target) => {
   var popup = make_popup();
   popup.setLngLat(target.lngLat).setHTML(html_msg).addTo(map);
@@ -69,17 +80,26 @@ const add_map_hover_styles = (map) => {
   });
 
   map.on("mouseenter", "indego-query", function (e) {
+    var props = e.features[0].properties;
+
+
     var stationTextDiv = document.querySelector("#station-name");
     var selected_station_name = stationTextDiv.innerHTML;
 
-    var props = e.features[0].properties;
+    const selectElement = document.querySelector("#directionality");
+    var selected_direction = selectElement.value
 
-    var msg = "<h3>Trips to/from " + selected_station_name + "</h3><ul>";
-    msg += "<li>Total: " + props.totalTrips * 75 + "</li>";
-    msg += "<li>FROM selected station: " + props.destinations * 75 + "</li>";
-    msg += "<li>TO selected station: " + props.origins * 75 + "</li>";
-    msg += "</ul>";
-    bind_popup(map, msg, e);
+    if (selected_direction == "origins") {
+      var msg = float_to_txt(props.origins) + " to " + selected_station_name
+    } else if (selected_direction == "destinations") {
+      var msg = float_to_txt(props.destinations) + " from " + selected_station_name
+    } else {
+      var msg = float_to_txt(props.totalTrips) + " to and from " + selected_station_name
+    }
+
+    var html_msg = "<h3>" + msg + "</h3>"
+
+    bind_popup(map, html_msg, e);
   });
   map.on("mouseleave", "indego-query", function (e) {
     remove_all_popups();
