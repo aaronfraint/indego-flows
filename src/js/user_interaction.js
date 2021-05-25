@@ -47,7 +47,7 @@ const wire_up_dropdown_selector = (map) => {
       var color = "rgb(" + colors.black + ")";
     }
 
-    var legend_path = "./img/" + v + ".png";
+    var legend_path = "img/" + v + ".png";
     document.getElementById("legend-img").setAttribute("src", legend_path);
 
     map.setPaintProperty("spider", "line-color", color);
