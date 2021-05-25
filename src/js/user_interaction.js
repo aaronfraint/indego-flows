@@ -11,13 +11,13 @@ const make_popup = () =>
 const float_to_txt = (num) => {
   var num_roundup = Math.ceil(num * 75);
   if (num_roundup == 1) {
-    return "1 trip"
+    return "1 trip";
   } else if (num_roundup > 1) {
-    return num_roundup.toString() + " trips"
+    return num_roundup.toString() + " trips";
   } else if (num_roundup == 0) {
-    return "0 trips"
+    return "0 trips";
   }
-}
+};
 
 const bind_popup = (map, html_msg, target) => {
   var popup = make_popup();
@@ -47,7 +47,7 @@ const wire_up_dropdown_selector = (map) => {
       var color = "rgb(" + colors.black + ")";
     }
 
-    var legend_path = "../img/" + v + ".png";
+    var legend_path = "./img/" + v + ".png";
     document.getElementById("legend-img").setAttribute("src", legend_path);
 
     map.setPaintProperty("spider", "line-color", color);
@@ -82,22 +82,25 @@ const add_map_hover_styles = (map) => {
   map.on("mouseenter", "indego-query", function (e) {
     var props = e.features[0].properties;
 
-
     var stationTextDiv = document.querySelector("#station-name");
     var selected_station_name = stationTextDiv.innerHTML;
 
     const selectElement = document.querySelector("#directionality");
-    var selected_direction = selectElement.value
+    var selected_direction = selectElement.value;
 
     if (selected_direction == "origins") {
-      var msg = float_to_txt(props.origins) + " to " + selected_station_name
+      var msg = float_to_txt(props.origins) + " to " + selected_station_name;
     } else if (selected_direction == "destinations") {
-      var msg = float_to_txt(props.destinations) + " from " + selected_station_name
+      var msg =
+        float_to_txt(props.destinations) + " from " + selected_station_name;
     } else {
-      var msg = float_to_txt(props.totalTrips) + " to and from " + selected_station_name
+      var msg =
+        float_to_txt(props.totalTrips) +
+        " to and from " +
+        selected_station_name;
     }
 
-    var html_msg = "<h3>" + msg + "</h3>"
+    var html_msg = "<h3>" + msg + "</h3>";
 
     bind_popup(map, html_msg, e);
   });
