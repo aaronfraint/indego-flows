@@ -89,10 +89,10 @@ const add_map_hover_styles = (map) => {
     var selected_direction = selectElement.value;
 
     if (selected_direction == "origins") {
-      var msg = float_to_txt(props.origins) + " to " + selected_station_name;
+      var msg = float_to_txt(props.origins) + " from " + selected_station_name;
     } else if (selected_direction == "destinations") {
       var msg =
-        float_to_txt(props.destinations) + " from " + selected_station_name;
+        float_to_txt(props.destinations) + " to " + selected_station_name;
     } else {
       var msg =
         float_to_txt(props.totalTrips) +
