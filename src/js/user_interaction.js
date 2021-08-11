@@ -85,20 +85,33 @@ const add_map_hover_styles = (map) => {
     var stationTextDiv = document.querySelector("#station-name");
     var selected_station_name = stationTextDiv.innerHTML;
 
+    var stationIdDiv = document.querySelector("#station-id");
+    var selected_station_id = stationIdDiv.innerHTML;
+
+
     const selectElement = document.querySelector("#directionality");
     var selected_direction = selectElement.value;
 
-    if (selected_direction == "origins") {
-      var msg = float_to_txt(props.origins) + " to " + selected_station_name;
-    } else if (selected_direction == "destinations") {
-      var msg =
-        float_to_txt(props.destinations) + " from " + selected_station_name;
-    } else {
-      var msg =
-        float_to_txt(props.totalTrips) +
-        " to and from " +
-        selected_station_name;
+    console.log(props)
+
+    if (props.station_id == selected_station_id){
+      var msg = float_to_txt(props.origins) + " round trips @ " + selected_station_name;
     }
+    else {
+      if (selected_direction == "origins") {
+        var msg = float_to_txt(props.origins) + " to " + selected_station_name;
+      } else if (selected_direction == "destinations") {
+        var msg =
+          float_to_txt(props.destinations) + " from " + selected_station_name;
+      } else {
+        var msg =
+          float_to_txt(props.totalTrips) +
+          " to and from " +
+          selected_station_name;
+      }
+    }
+
+
 
     var html_msg = "<h3>" + msg + "</h3>";
 
@@ -115,10 +128,10 @@ const add_map_click_actions = (map, graph) => {
 
     // Update the title in the header block and address
     const stationTextDiv = document.querySelector("#station-name");
-    // const stationAddressTextDiv = document.querySelector("#station-address");
+    const stationIdDiv = document.querySelector("#station-id");
 
     stationTextDiv.innerHTML = props.name;
-    // stationAddressTextDiv.innerHTML = props.addressstreet;
+    stationIdDiv.innerHTML = props.station_id.toString()
 
     graph.options.plugins.title.text = props.name;
 
