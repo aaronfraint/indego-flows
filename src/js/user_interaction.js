@@ -92,8 +92,6 @@ const add_map_hover_styles = (map) => {
     const selectElement = document.querySelector("#directionality");
     var selected_direction = selectElement.value;
 
-    console.log(props)
-
     if (props.station_id == selected_station_id){
       var msg = float_to_txt(props.origins) + " round trips @ " + selected_station_name;
     }
